@@ -1,0 +1,26 @@
+plugins {
+	id 'java'
+    id 'war'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
+    testCompile 'junit:junit:[4,)'
+}
+
+task initWebDir {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+test {
+    testLogging {
+        // Show that tests are run in the command-line output
+        events 'started', 'passed'
+    }
+}
